@@ -23,38 +23,33 @@
  */
 
 package com.alpsbte.alpslib.web;
-
 import com.alpsbte.alpslib.web.model.LinkRequest;
 import com.google.gson.Gson;
+import okhttp3.*;
 
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpRequest.BodyPublishers;
-import java.net.http.HttpResponse;
-import java.net.http.HttpResponse.BodyHandlers;
 import java.util.UUID;
 
 public class BTEWebAPI {
 
     private static final String urlBase = "https://api.buildtheearth.net/api/v1";
 
-    public static void main(String[] args) throws Exception {
-        LinkRequest linkRequest = new LinkRequest(123456, UUID.randomUUID(), "rijsberhp");
-        sendLinkRequest(linkRequest);
-    }
-
     public static void sendLinkRequest(LinkRequest linkRequest) throws Exception {
         Gson gson = new Gson();
-        String linkRequestJson = gson.toJson(linkRequest, LinkRequest.class);
+        String json = gson.toJson(linkRequest, LinkRequest.class);
 
-        HttpRequest httpRequest = HttpRequest.newBuilder()
-                .uri(new URI(urlBase.concat("/minecraft/code")))
-                .PUT(BodyPublishers.ofString(linkRequestJson))
+        OkHttpClient client = new OkHttpClient();
+
+        RequestBody body = RequestBody.create(
+                json,
+                MediaType.parse("application/json")
+        );
+
+        Request request = new Request.Builder()
+                .url(urlBase.concat("/minecraft/code"))
+                .put(body)
                 .build();
 
-        try (HttpClient httpClient = HttpClient.newHttpClient()) {
-            HttpResponse<String> response = httpClient.send(httpRequest, BodyHandlers.ofString());
+        try (Response response = client.newCall(request).execute()) {
             System.out.println(response.body());
         }
     }

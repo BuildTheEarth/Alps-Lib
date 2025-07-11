@@ -26,5 +26,26 @@ package com.alpsbte.alpslib.web.model;
 
 import java.util.UUID;
 
-public record LinkRequest(int code, UUID uuid, String name) {
+public final class LinkRequest {
+    private final int code;
+    private final UUID uuid;
+    private final String name;
+
+    public LinkRequest(int code, UUID uuid, String name) {
+        this.code = code;
+        this.uuid = uuid;
+        this.name = name;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public UUID getUuid() {
+        return uuid;
+    }
+
+    public String getName() {
+        return name;
+    }
 }

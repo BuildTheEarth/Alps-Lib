@@ -11,7 +11,7 @@
 
     <artifactId>alpslib-web</artifactId>
     <name>AlpsLib-Web</name>
-    <version>1.0.ß</version>
+    <version>0.1.0</version>
 
     <dependencies>
         <dependency>
@@ -19,13 +19,10 @@
             <artifactId>gson</artifactId>
             <version>2.13.1</version>
         </dependency>
-
-        <!-- Paper -->
         <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>1.21.4-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.12.0</version>
         </dependency>
     </dependencies>
 
@@ -61,24 +58,15 @@
     </build>
 
     <properties>
-        <maven.compiler.release>21</maven.compiler.release>
+        <maven.compiler.release>8</maven.compiler.release>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-
-        <junit.jupiter.version>5.11.4</junit.jupiter.version>
-        <kotlin.version>2.0.21</kotlin.version>
     </properties>
     <repositories>
         <repository>
             <id>maven_central</id>
             <name>Maven Central</name>
             <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-
-        <!-- Paper & Bukkit -->
-        <repository>
-            <id>papermc</id>
-            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
     </repositories>
 </project>
